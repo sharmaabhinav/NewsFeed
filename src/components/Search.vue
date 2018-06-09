@@ -1,6 +1,6 @@
 <template>
   <sui-container class="margin-30">
-    <sui-input placeholder="Search (by name)" icon="search" iconPosition="left" class="large" v-on:change="onChange"/>
+    <sui-input placeholder="Search (by name)" icon="search" iconPosition="left" class="large" v-on:keyup="onKeyUp"/>
   </sui-container>
 </template>
 
@@ -8,14 +8,14 @@
 <script>
   export default {
     name: 'Search',
-    props: ['onChange']
+    props: ['onKeyUp']
 
   }
 </script>
 
 <style scoped>
   .large {
-    width: 100%
+    width: 80%
   }
   .margin-30 {
     margin-top: 30px !important
