@@ -2,9 +2,12 @@
   <div id="app">
     <sui-container text-align="left">
       <Header />
-      <Search :onKeyUp="onSearch" />
-      <DropDown :options="sortOptions" :onChange="onSortChange"/>
-      <List :items="items" />
+      <sui-segment raised>
+        <Search :onKeyUp="onSearch" />
+        <sui-label>Sort by</sui-label>
+        <DropDown :options="sortOptions" :onChange="onSortChange" placeholder='Sort by'/>
+      </sui-segment>
+       <List :items="items" />
     </sui-container>
   </div>
 </template>
@@ -30,7 +33,9 @@ export default {
       const regex = new RegExp(`.*${value}.*`, 'i')
       this.items = store.get('items').filter((item) => item.title.search(regex) !== -1)
     },
-    onSortChange () {
+    onSortChange (value) {
+      const {_} = this
+      this.items = _.sortBy(store.get('items'), [value])
     }
   },
   mounted() {
@@ -53,11 +58,11 @@ export default {
         },
         {
           text: 'Comments',
-          value: 'comment'
+          value: 'num_comments'
         },
         {
           text: 'Points',
-          value: 'point'
+          value: 'num_points'
         }
       ]
     }

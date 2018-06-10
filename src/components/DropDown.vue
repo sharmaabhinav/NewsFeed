@@ -1,20 +1,24 @@
 <template lang="html">
   <sui-dropdown
-    placeholder="Sort by"
-    :options="options"
+    :placeholder='placeholder'
+    :options='options'
     selection
-    v-model="current"
-    v-on:change="onChange"
+    v-model='currentSortOption'
   />
 </template>
 
 <script>
   export default {
     name: 'DropDown',
-    props: ['options', 'onChange'],
+    props: ['options', 'onChange', 'placeholder'],
+    watch: {
+      currentSortOption: function (newOption) {
+        this.onChange(newOption)
+      }
+    },
     data () {
       return {
-        current: null
+        currentSortOption: null
       }
     }
   }
